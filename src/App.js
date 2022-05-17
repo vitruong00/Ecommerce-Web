@@ -1,34 +1,18 @@
-import { Directory } from "./components/directory/directory.component";
+import Home from "./components/routes/home/home.component";
+import { Route, Routes } from "react-router-dom";
+import { Navigation } from "./components/routes/navigation/navigation.component";
+import { SignIn } from "./components/routes/signin/sign-in.component";
 
 const App = () => {
-  const categories = [
-    {
-      id: 1,
-      title: "Albums",
-      imageUrl: "images/BTS_Jimin_Butter_concept_photo_2.png",
-    },
-    {
-      id: 2,
-      title: "Tour Merch",
-      imageUrl: "images/BTS_Jungkook_Butter_concept_photo_2.png",
-    },
-    {
-      id: 3,
-      title: "Merch",
-      imageUrl: "images/BTS_Jin_Butter_concept_photo_2.png",
-    },
-    {
-      id: 4,
-      title: "Book",
-      imageUrl: "images/BTS_V_Butter_concept_photo_2.png",
-    },
-    {
-      id: 5,
-      title: "DVD",
-      imageUrl: "images/BTS_J-Hope_Butter_concept_photo_2.png",
-    },
-  ];
-  return <Directory categories={categories} />;
+  return (
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="shop" />
+        <Route path="sign-in" element={<SignIn />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
