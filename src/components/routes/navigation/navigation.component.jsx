@@ -2,8 +2,13 @@ import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react";
 import { ReactComponent as BTS } from "../../assets/icons8-bts-logo.svg";
 import "./navigation.styles.scss";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/user.context";
+import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
 export const Navigation = () => {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <Fragment>
       <div className="navigation">
@@ -14,9 +19,15 @@ export const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutUser}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />
