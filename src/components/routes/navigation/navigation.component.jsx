@@ -6,10 +6,12 @@ import CartIcon from "../../cart-icon/cart-icon.component";
 import CartDropDown from "../../cart-dropdown/cart-dropdown.component";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/user.context";
+import { CartContext } from "../../../contexts/cart.context";
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
 
 export const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -32,7 +34,7 @@ export const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        <CartDropDown />
+        {isCartOpen && <CartDropDown />}
       </div>
       <Outlet />
     </Fragment>
