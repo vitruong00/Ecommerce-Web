@@ -8,12 +8,23 @@ import Checkout from "./routes/checkout/checkout.component";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
+  getCategoriesAndDocuments,
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
+import { setCategories } from "./store/categories/categories.action";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoriesArray = await getCategoriesAndDocuments("categories");
+      dispatch(setCategories(categoriesArray));
+    };
+
+    getCategoriesMap();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

@@ -21,7 +21,6 @@ const Category = () => {
       <CategoryContainer>
         {products &&
           products.map((product) => {
-            console.log(product);
             return <ProductCard key={product.id} product={product} />;
           })}
       </CategoryContainer>
