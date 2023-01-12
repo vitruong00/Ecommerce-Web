@@ -13,17 +13,13 @@ import {
 import { setCurrentUser } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 import { setCategories } from "./store/categories/categories.action";
+import { fetchCategoriesAsync } from "./store/categories/categories.action";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getCategoriesMap = async () => {
-      const categoriesArray = await getCategoriesAndDocuments("categories");
-      dispatch(setCategories(categoriesArray));
-    };
-
-    getCategoriesMap();
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   useEffect(() => {
